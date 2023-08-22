@@ -16,14 +16,30 @@
 
 		@apply block w-full rounded-full py-3 lg:w-max lg:px-6;
 
-		// ot - only text, wi - with icon;
+		&:hover {
+			scale: 1.1;
+		}
 
+		&--hamburger {
+			@apply text-5xl;
+		}
+
+		// ot - only text, wi - with icon;
+		transition: scale 0.3s, padding-left 0.3s;
 		&--ot {
 			@apply text-center;
 		}
 
 		&--wi {
 			@apply flex items-center justify-center;
+			&:hover {
+				img {
+					padding-left: 0.5rem;
+				}
+			}
+			img {
+				transition: padding-left 1s;
+			}
 		}
 
 		// &--xyz (x - text color, y - background color, z - border color), (0 = nothing)
@@ -42,6 +58,13 @@
 
 		&--b0b {
 			@apply border border-black text-lead;
+			&:hover {
+				scale: 1;
+				img {
+					padding-left: 0;
+				}
+			}
+
 		}
 
 		&--gw0 {
@@ -59,9 +82,13 @@
 
 	.anchor {
 		@apply text-sm font-normal leading-normal;
+		transition: scale 0.3s;
+		&:is(a, p):not(.anchor--nh):hover {
+			scale: 1.1;
+		}
 		&--footer {
 			@apply px-2 py-1 text-impure-white;
-			transition: color 0.3s, background-color 0.3s;
+			transition: color 0.3s, background-color 0.3s, scale 0.3s;
 			&:hover {
 				@apply bg-impure-white text-lead;
 			}
@@ -70,6 +97,42 @@
 	.lead {
 		@apply text-base font-normal leading-normal text-lead;
 		letter-spacing: -0.01em;
+	}
+	.search-for {
+		input {
+			transition: padding-bottom 0.3s;
+			&::placeholder {
+				@apply anchor text-lead;
+				font-size: inherit;
+			}
+		}
+		img {
+			transition: scale 0.3s;
+			&:hover {
+				scale: 1.1;
+			}
+		}
+	}
+	.dropdown-menu {
+		transition: transform 1s;
+		a {
+			transition: background-color 0.3s;
+			&:hover {
+				img {
+					translate: 0.5rem;
+				}
+			}
+			img {
+				transition: translate 0.3s;
+			}
+		}
+	}
+	.arrow-left,
+	.arrow-right {
+		transition: scale 0.3s;
+		&:hover {
+			scale: 1.2;
+		}
 	}
 	.gallery,
 	.gallery-item {
@@ -84,23 +147,27 @@
 		transition: height 1s;
 	}
 	.gallery-item {
-		@apply mb-6 before:absolute before:h-full before:w-full before:bg-filter-white before:content-[''] xl:mb-11;
+		@apply mb-6 overflow-hidden before:absolute before:h-full before:w-full before:bg-filter-white before:content-[''] xl:mb-11;
+		transition: scale 0.3s;
+		cursor: pointer;
 		&:last-child {
 			@apply mb-0;
+		}
+		&:hover{
+			scale: 0.9;
 		}
 		img {
 			@apply w-full;
 		}
-		cursor: pointer;
 	}
 	.gallery-gutter {
 		@apply w-6 xl:w-11;
 	}
 	.gallery-filter {
-		@apply w-full h-full;
+		@apply h-full w-full;
 		background-image: linear-gradient(360deg, #dcc1ab 0%, rgba(214, 183, 158, 0) 100%);
 		transition: opacity 1s;
-	}X
+	}
 	.card {
 		@apply cursor-pointer;
 		transition: outline 0.3s, scale 0.3s;
@@ -129,26 +196,8 @@
 		@apply fixed left-0 top-0 z-20 flex h-screen w-screen items-center justify-center px-6;
 		background-color: rgba($color: #000000, $alpha: 0.9);
 	}
-	.btn-arrow-right {
-		&:hover {
-			img {
-				translate: 0.5rem;
-			}
-		}
-		img {
-			transition: translate 0.3s;
-		}
-	}
-	.btn-arrow-down {
-		&:hover {
-			img {
-				rotate: -90deg;
-				translate: 0.5rem;
-			}
-		}
-		img {
-			transition: rotate 0.3s, translate 0.3s 0.3s;
-		}
+	.hamburger-nav {
+		transition: transform 0.3s;
 	}
 	@media (min-width: 640px) {
 		.gallery-sizer,
