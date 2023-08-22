@@ -67,7 +67,7 @@ function devScripts() {
 		`${options.paths.src.js}/**/*.js`,
 		`!${options.paths.src.js}/**/external/*`,
 	])
-		.pipe(concat({ path: 'scripts.js' }))
+		// .pipe(concat({ path: 'scripts.js' }))
 		.pipe(dest(options.paths.dist.js))
 }
 
@@ -136,7 +136,7 @@ function prodStyles() {
 
 function prodScripts() {
 	return src([`${options.paths.src.js}/libs/**/*.js`, `${options.paths.src.js}/**/*.js`])
-		.pipe(concat({ path: 'scripts.js' }))
+		// .pipe(concat({ path: 'scripts.js' }))
 		.pipe(uglify())
 		.pipe(dest(options.paths.build.js))
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:ital,wght@0,500;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:ital,wght@0,400;0,500;1,500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,6 +9,7 @@
 		scroll-behavior: smooth;
 		font-family: 'Inter', sans-serif;
 		color: #111111;
+		background-color: #f5f0ec;
 	}
 	.anchor {
 		@apply text-sm font-normal leading-normal;
@@ -17,7 +18,102 @@
 		@apply text-base font-normal leading-normal text-lead;
 		letter-spacing: -0.01em;
 	}
-	.hero{
-		height: calc(90vh - 72px);
+	.gallery,
+	.gallery-item {
+		@apply relative;
+	}
+	.gallery {
+		@apply grid;
+	}
+	.gallery-item {
+		@apply mb-6 before:absolute before:h-full before:w-full before:bg-filter-white before:content-[''] xl:mb-11;
+		&:last-child {
+			@apply mb-0;
+		}
+		img {
+			@apply w-full;
+		}
+		cursor: pointer;
+	}
+	.gallery-sizer,
+	.gallery-item {
+		@apply w-full;
+	}
+	.gallery-filter {
+		@apply pointer-events-none absolute bottom-0 z-10 w-full;
+		height: 70%;
+		background-image: linear-gradient(360deg, #dcc1ab 0%, rgba(214, 183, 158, 0) 100%);
+	}
+	.card {
+		@apply cursor-pointer;
+		transition: outline 0.3s, scale 0.3s;
+		&:hover {
+			scale: 1.05;
+		}
+	}
+	.card-link {
+		transition: scale 0.3s;
+		&:hover {
+			scale: 1.05;
+			img {
+				translate: 0.5rem;
+			}
+		}
+		img {
+			transition: translate 0.3s;
+		}
+	}
+
+	.focus-card {
+		@apply outline outline-2 outline-offset-8 outline-green;
+		scale: 1.05;
+	}
+	.photo-view {
+		@apply fixed left-0 top-0 z-20 flex h-screen w-screen items-center justify-center px-6;
+		background-color: rgba($color: #000000, $alpha: 0.9);
+	}
+	.btn-arrow-right {
+		&:hover {
+			img {
+				translate: 0.5rem;
+			}
+		}
+		img {
+			transition: translate 0.3s;
+		}
+	}
+	.btn-arrow-down {
+		&:hover {
+			img {
+				rotate: -90deg;
+				translate: 0.5rem;
+			}
+		}
+		img {
+			transition: rotate 0.3s, translate 0.3s 0.3s;
+		}
+	}
+	@media (min-width: 640px) {
+		.gallery-sizer,
+		.gallery-item {
+			width: calc(50% - 0.75rem);
+		}
+	}
+	@media (min-width: 1024px) {
+		.gallery-sizer,
+		.gallery-item {
+			width: calc(33.3% - 1rem);
+		}
+		.gallery-item {
+			&:nth-last-child(-n + 3) {
+				@apply mb-0;
+			}
+		}
+	}
+	@media (min-width: 1280px) {
+		.gallery-sizer,
+		.gallery-item {
+			width: calc(33.3% - 1.833rem);
+		}
 	}
 }
