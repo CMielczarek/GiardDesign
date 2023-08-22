@@ -8,8 +8,8 @@ const masonryInit = () => {
 	})
 }
 const dropdownsInit = () => {
-	const dropdownList = document.querySelectorAll('.dropdown')
 	const offerSection = document.querySelector('#offer')
+	const dropdownList = document.querySelectorAll('.dropdown')
 	dropdownList.forEach(item => {
 		const dropdownBtn = item.querySelector('.dropdown-btn')
 		const dropdownMenu = item.querySelector('.dropdown-menu')
@@ -57,51 +57,68 @@ const handleFullScreen = btn => {
 }
 
 const handleFolding = () => {
-	
+	const gallery = document.querySelector('.gallery')
+	const galleryFilter = gallery.querySelector('.gallery-filter')
+	const expandBtn = gallery.querySelector('.expand')
+	const expandBtnIcon = expandBtn.querySelector('img')
+
+	expandBtn.addEventListener('click', () => {
+		gallery.classList.toggle('h-limit')
+		galleryFilter.classList.toggle('opacity-0')
+		expandBtn.classList.toggle('bg-impure-white')
+		expandBtnIcon.classList.toggle('rotate-180')
+		if (!gallery.classList.contains('h-limit')) {
+			expandBtn.firstChild.textContent = 'Zwiń'
+		} else {
+			expandBtn.firstChild.textContent = 'Rozwiń'
+		}
+	})
 }
 
 window.onload = () => {
+	AOS.init()
 	masonryInit()
-	dropdownsInit()
-	const chevronLeft = document.querySelector('.chevron-left')
-	const chevronRight = document.querySelector('.chevron-right')
-	const photoView = document.querySelector('.photo-view')
-	const photoViewScreen = photoView.querySelector('.photo-view-screen')
-	const galleryItems = document.querySelectorAll('.gallery .gallery-item')
-	const fullScreenPhotoViewBtn = photoView.querySelector('.full-screen')
-	const exitPhotoViewBtn = photoView.querySelector('.exit')
-	const photoViewCounter = photoView.querySelector('.photo-view-counter')
-	const photoCount = galleryItems.length
-	galleryItems.forEach(item => {
-		item.addEventListener('click', () => {
-			const photoSrc = item.querySelector('img').attributes.getNamedItem('src').value
-			let photoIndex = Number(photoSrc.match(/photo(\d+)\.jpg/)[1])
-			document.body.classList.add('overflow-hidden')
-			photoView.classList.remove('hidden')
-			photoViewScreen.setAttribute('src', photoSrc)
-			photoViewCounter.textContent = `${photoIndex} / ${photoCount}`
-			chevronLeft.addEventListener('click', () => {
-				photoIndex = photoIndex === 1 ? photoCount : photoIndex - 1
-				photoViewScreen.setAttribute('src', `./img/photo${photoIndex}.jpg`)
-				photoViewCounter.textContent = `${photoIndex} / ${photoCount}`
-			})
-			chevronRight.addEventListener('click', () => {
-				photoIndex = photoIndex === photoCount ? 1 : photoIndex + 1
-				photoViewScreen.setAttribute('src', `./img/photo${photoIndex}.jpg`)
-				photoViewCounter.textContent = `${photoIndex} / ${photoCount}`
-			})
-		})
-	})
-	exitPhotoViewBtn.addEventListener('click', () => {
-		document.body.classList.remove('overflow-hidden')
-		photoView.classList.add('hidden')
-		if(fullScreenPhotoViewBtn.firstChild.classList.contains('ti-arrows-minimize')){
-			handleFullScreen(fullScreenPhotoViewBtn)
-		}
-	})
-	fullScreenPhotoViewBtn.addEventListener('click', () => {
-		handleFullScreen(fullScreenPhotoViewBtn)
-	})
+	// dropdownsInit()
+	handleFolding()
+	// const chevronLeft = document.querySelector('.chevron-left')
+	// const chevronRight = document.querySelector('.chevron-right')
+	// const photoView = document.querySelector('.photo-view')
+	// const photoViewScreen = photoView.querySelector('.photo-view-screen')
+	// const galleryItems = document.querySelectorAll('.gallery .gallery-item')
+	// const fullScreenPhotoViewBtn = photoView.querySelector('.full-screen')
+	// const exitPhotoViewBtn = photoView.querySelector('.exit')
+	// const photoViewCounter = photoView.querySelector('.photo-view-counter')
+	// const photoCount = galleryItems.length
+	// galleryItems.forEach(item => {
+	// 	item.addEventListener('click', () => {
+	// 		const photoSrc = item.querySelector('img').attributes.getNamedItem('src').value
+	// 		let photoIndex = Number(photoSrc.match(/photo(\d+)\.jpg/)[1])
+	// 		document.body.classList.add('overflow-hidden')
+	// 		photoView.classList.remove('hidden')
+	// 		photoViewScreen.setAttribute('src', photoSrc)
+	// 		photoViewCounter.textContent = `${photoIndex} / ${photoCount}`
+	// 		chevronLeft.addEventListener('click', () => {
+	// 			photoIndex = photoIndex === 1 ? photoCount : photoIndex - 1
+	// 			photoViewScreen.setAttribute('src', `./img/photo${photoIndex}.jpg`)
+	// 			photoViewCounter.textContent = `${photoIndex} / ${photoCount}`
+	// 		})
+	// 		chevronRight.addEventListener('click', () => {
+	// 			photoIndex = photoIndex === photoCount ? 1 : photoIndex + 1
+	// 			photoViewScreen.setAttribute('src', `./img/photo${photoIndex}.jpg`)
+	// 			photoViewCounter.textContent = `${photoIndex} / ${photoCount}`
+	// 		})
+	// 	})
+	// })
+	// exitPhotoViewBtn.addEventListener('click', () => {
+	// 	document.body.classList.remove('overflow-hidden')
+	// 	photoView.classList.add('hidden')
+	// 	if (fullScreenPhotoViewBtn.firstChild.classList.contains('ti-arrows-minimize')) {
+	// 		handleFullScreen(fullScreenPhotoViewBtn)
+	// 	}
+	// })
+	// fullScreenPhotoViewBtn.addEventListener('click', () => {
+	// 	handleFullScreen(fullScreenPhotoViewBtn)
+	// })
 
 	const hamburgerNav = document.querySelector('.hamburger-nav')
 	const exitBtn = hamburgerNav.querySelector('.exit')
@@ -114,4 +131,5 @@ window.onload = () => {
 		document.body.classList.remove('overflow-hidden')
 		hamburgerNav.classList.add('hidden')
 	})
+	console.log('finish');
 }

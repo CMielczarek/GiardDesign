@@ -11,8 +11,61 @@
 		color: #111111;
 		background-color: #f5f0ec;
 	}
+	.ancbtn {
+		// anchor button
+
+		@apply block w-full rounded-full py-3 lg:w-max lg:px-6;
+
+		// ot - only text, wi - with icon;
+
+		&--ot {
+			@apply text-center;
+		}
+
+		&--wi {
+			@apply flex items-center justify-center;
+		}
+
+		// &--xyz (x - text color, y - background color, z - border color), (0 = nothing)
+
+		&--wg0 {
+			@apply bg-green text-impure-white;
+		}
+
+		&--g0g {
+			@apply border border-green text-green;
+		}
+
+		&--w0w {
+			@apply border border-white text-white;
+		}
+
+		&--b0b {
+			@apply border border-black text-lead;
+		}
+
+		&--gw0 {
+			@apply bg-impure-white text-green;
+		}
+	}
+
+	.heading {
+		&--second {
+			@apply font-montserrat font-medium;
+			font-size: 2.5rem;
+			line-height: 1.15;
+		}
+	}
+
 	.anchor {
 		@apply text-sm font-normal leading-normal;
+		&--footer {
+			@apply px-2 py-1 text-impure-white;
+			transition: color 0.3s, background-color 0.3s;
+			&:hover {
+				@apply bg-impure-white text-lead;
+			}
+		}
 	}
 	.lead {
 		@apply text-base font-normal leading-normal text-lead;
@@ -22,8 +75,13 @@
 	.gallery-item {
 		@apply relative;
 	}
+	.gallery-sizer,
+	.gallery-item {
+		@apply w-full;
+	}
 	.gallery {
-		@apply grid;
+		@apply grid overflow-hidden;
+		transition: height 1s;
 	}
 	.gallery-item {
 		@apply mb-6 before:absolute before:h-full before:w-full before:bg-filter-white before:content-[''] xl:mb-11;
@@ -35,15 +93,14 @@
 		}
 		cursor: pointer;
 	}
-	.gallery-sizer,
-	.gallery-item {
-		@apply w-full;
+	.gallery-gutter {
+		@apply w-6 xl:w-11;
 	}
 	.gallery-filter {
-		@apply pointer-events-none absolute bottom-0 z-10 w-full;
-		height: 70%;
+		@apply w-full h-full;
 		background-image: linear-gradient(360deg, #dcc1ab 0%, rgba(214, 183, 158, 0) 100%);
-	}
+		transition: opacity 1s;
+	}X
 	.card {
 		@apply cursor-pointer;
 		transition: outline 0.3s, scale 0.3s;
